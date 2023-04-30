@@ -43,7 +43,7 @@ aside{
 section{    
     float: left;
     flex: 60%;
-    padding: 20px;
+    padding: 0;
 }
 
 footer{
@@ -52,7 +52,7 @@ footer{
 }
 
 .formulario{
-    margin: 2% 6% 2% 3%;
+    margin: 2% 3% 2% 3%;
     padding: 10%;
     background-color: azure;
     border-radius: 5px;
@@ -61,7 +61,7 @@ footer{
 }
 
 .titulo{
-    margin: 2% 6% 5% 3%;          /*arriba derecha abajo izquierda*/
+    margin: 2% 3% 5% 3%;          /*arriba derecha abajo izquierda*/
     padding: 0.5%;
     background-color: coral;
     border-radius: 5px;
@@ -73,5 +73,11 @@ footer{
     nav, .row{
         flex-direction: column;
         text-align: center;
+    }
+    #decoracion{
+        display: block;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
