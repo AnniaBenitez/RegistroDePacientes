@@ -4,7 +4,9 @@
         <title>Registro de Pacientes</title>
         <link rel="icon" href="../img/logo.ico">
         <link rel="stylesheet" href="../css/doctores.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <meta name="viewport" content="width=device-width, initial-scale=1">          
+        <script src="../js/scriptDoctores.js" defer></script>      
+        <meta charset="UTF-8">
     </head>
     <body>
         <nav>
@@ -22,17 +24,11 @@
                     <h2>Doctores con los que trabajamos:</h2>
                 </article>
 
-                <article class="formulario">
-                    <ul>
-                        <li>Dr. Perez - Traumatólogo</li>
-                        <p>Especializado en las distintas afecciones del sistema músculo 
-                            esquelético, ya sean fracturas, luxaciones, enfermedades congénitas,
-                             infecciones, lesiones degenerativas o lesiones tumorales. <br></p>
-                        <li>Dr. Sanchez - Médico</li>
-                        <p></p>
-                        <li>Dra. Trochez - Radiologa</li>
-                        <p></p>
-                    </ul>    
+                <article class="doctores-lista">
+                    <div id = "doctores">
+                        <p id = 'alerta'>Sin doctores actualmente...</p>
+                        
+                    </div>    
                 </article>
 
             </section>

@@ -29,12 +29,7 @@ section{
     padding: 20px;
 }
 
-footer{
-    background-color: darkcyan;
-    padding: 20px;
-}
-
-.formulario{
+.doctores-lista{
     margin: 2% 6% 2% 3%;
     padding: 10%;
     background-color: azure;
