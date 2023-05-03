@@ -2,9 +2,10 @@
 <html lang = 'es'>
     <head>
         <title>Registro de Pacientes</title>
-        <link rel="icon" href="./img/logo.ico">
-        <link rel="stylesheet" href="../css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <link rel="icon" href="../img/logo.ico">
+        <link rel="stylesheet" href="../css/aggTurno.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+              
     </head>
     <body>
         <nav>
@@ -19,30 +20,38 @@
             <section>
 
                 <article class="titulo">
-                    <h2>Pacientes en espera:</h2>
+                    <h2>Agregar Nuevo Paciente:</h2>
                 </article>
 
                 <article class="formulario">
-                    <h3>Nombre del Paciente: </h3>
-                    <input class="item" id="Nombre" type = "text" placeholder="Nombre del paciente" />
-                    <h3>Apellido del Paciente: </h3>
-                    <input class="item" id="apellido" type = "text" placeholder="Apellido del paciente" />
-                    <h3>Doctor con el que se atiende: </h3>
-                    <!--Cortina con doctores registrados-->
-                    <h3>Fecha: </h3>
-                    <!--cortina con fechas disponibles-->
-                    <h3>Horario: </h3>
-                    <!--cortina con horarios disponibles-->
-                    <h3>Observaciones: </h3>
-                </article>
-
+                    <form action="">
+                        <h3>Nombre del Paciente: </h3>
+                        <input class="item" id="Nombre" type = "text" placeholder="Nombre del paciente" />
+                        <h3>Apellido del Paciente: </h3>
+                        <input class="item" id="apellido" type = "text" placeholder="Apellido del paciente" />
+                        <h3>Doctor con el que se atiende: </h3>
+                            <select id="doctor">
+                                <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+                                <option value="Tarjeta de débito">Tarjeta de débito</option>
+                                <option value="Efectivo">Efectivo</option>
+                            </select>
+                        <h3>Fecha: </h3>
+                            <input type="date" class="input" id="fecha">
+                        <h3>Horario: </h3>
+                            <select id="horarios">
+                                <option value="Tarjeta de crédito">Tarjeta de crédito</option>
+                                <option value="Tarjeta de débito">Tarjeta de débito</option>
+                                <option value="Efectivo">Efectivo</option>
+                            </select>
+                        <h3>Observaciones: </h3>
+                        <input class="item" id="obs" type = "text" placeholder="Observaciones de paciente..." />
+                        <div id="button" class="button" onclick="onRegistrarDato()">Registrar Datos</div>
+                    </form>                    
+                </article>                
             </section>
 
         </div>
-        
-        <footer>
-            <h3>pie de pagina</h3>
-        </footer>
+        <script src="../js/aggTurno.js" defer></script> 
     </body>
 
 </html>
