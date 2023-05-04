@@ -53,7 +53,7 @@ footer{
 
 .formulario{
     margin: 2% 3% 2% 3%;
-    padding: 10%;
+    padding: 2%;
     background-color: azure;
     border-radius: 5px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -67,6 +67,25 @@ footer{
     border-radius: 5px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
     0 10px 10px rgba(0,0,0,0.22);
+}
+
+.consulta-item{
+    margin: 2% 3% 5% 3%;          /*arriba derecha abajo izquierda*/
+    padding: 0.2%;
+    background-color: rgb(244, 170, 143);
+    border-radius: 5px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    align-items: center;
+    cursor: pointer;
+}
+
+.consulta-item:hover{
+    background-color: rgb(211, 66, 66);
+}
+
+.texto{
+    text-align: center;
 }
 
 @media screen and (max-width: 700px){

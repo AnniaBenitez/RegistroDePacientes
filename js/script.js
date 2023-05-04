@@ -1,5 +1,5 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7CklUub8Pv_NCas0_jee35X6PcB4HrQNN-Ih1czs1wRZx2h1K7qX-25F8HkdR14AfbxVFxnlB2GUocPJ3RSbc2aTndw6J7KSDQyNEAsr_MOyIe5pgR5VRatQmJm5R_WN_t9FzH1VxjdvISUm_K7gpL7t1HccaCgYKAUcSARESFQG1tDrpgOJNl9s0lKwFE56hYB1vtQ0166";
+  "ya29.a0AWY7Cklx-ypK1rWo3CQEeEMPujpfR6chhxMqF13c2DSE1AqnbycGm5TTRjy25pKIMFtPYYuNb-6IgIz6jnlaSvc8A_uCh0jXjzlw-DvpnBvwnmLiND4ZdwXX9n7CqOGbBXS5_AWkW6WcXrKxomWUgFipct1NaCgYKAVISARESFQG1tDrpbnvMany_FE6gskNTSF-i5g0163";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
@@ -22,40 +22,23 @@ fetch(
         alerta.style.display = 'none';
     
       //Se ordenan los elementos por fecha y hora 
-        for(var i=0; i<values.length; i++){
+        //for(var i=0; i<values.length; i++){
           
-        }
+        //}
 
+        //Se imprimen los pacientes actuales que esperan consulta
         for (var i = 1; i < values.length; i++) {
 
             const consulta = document.createElement("div");
+            const texto = document.createElement("p");
             consulta.className =  "consulta-item";
-
-            // Nombre del doctor en lista
-            const name = document.createElement("div");
-            name.className = "casilla";
-            doctorName.innerHTML = 'Paciente: NOMBRE APELLIDO - FECHA HORA'; 
-    
-            // otros datos del doc tipo p
-            const fechaDisp = document.createElement("p");
-            fechaDisp.className = "fecha";
-            fechaDisp.innerHTML = 'Los días: ' + values[i][2];
-
-            const horario = document.createElement('p');
-            horario.className='horas';
-            horario.innerHTML = 'De ' + values[i][1];
-    
-            const especialidad = document.createElement('p');
-            especialidad.className='esp';
-            especialidad.innerHTML = 'Especialidad: ' + values[i][3];
-
-            // Agregamos todos los elementos al div de producto
-            consulta.appendChild(doctorName);
-            consulta.appendChild(fechaDisp);
-            consulta.appendChild(horario);
-            consulta.appendChild(especialidad);
-
+            texto.className =  "texto";           
+            texto.innerHTML = '<b>Paciente:</b> ' + values[i][0] + ' ' + values[i][1] + '  | <b>Horario:</b> ' + values[i][2] + ' - ' + values[i][3];
+            texto.addEventListener('click', ()=>{
+                console.log('prueba');
+            });
             // Agregamos el producto a la lista
+            consulta.appendChild(texto);
             lista.appendChild(consulta);
         }
     });
