@@ -1,5 +1,5 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7CknDI8OoDdLyKMo21qdLKcBVCoyBKfmEps7hOUfPX1rdnDYJhSx9n2OsyGOLPePPwcyuPmmZPHKH4KdflmT-QsIxDh7GQboR2DZjfiFBRTLurAdtUkZFfqSa_4MvsmCFMr9XS1jlx1g_Xg3A3BFPCt1JXbcaCgYKAZ4SARESFQG1tDrp6-mWWDHFExfK5tsTu6T5jg0166";
+  "ya29.a0AWY7CkkuewPUd_fpGxyFASeD2EeXlzKFLk9GoIY3quPQdeff1MlkWJPT5cAgtwmLGIy1rfkF0XFxmK0CQL7CxjQUf3c767H7FdLBdco72irDYz-YJ_PFaybpUUjG-tZu4tvxGvCqoSjW-q_yAm4saIy4_V9saCgYKAecSARESFQG1tDrpVJJIZSytxB9DNQwNcKmAFg0163";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
@@ -32,29 +32,36 @@ fetch(
             const consulta = document.createElement("div");
             const texto = document.createElement("p");
             consulta.className =  "consulta-item";
+
+//Funcion que, al hacer click, debe imprimir todos los detalles AUN NO ANDA
+
+            //consulta.addEventListener('click', imprimirDetalles());
             texto.className =  "texto";           
             texto.innerHTML = '<b>Paciente:</b> ' + values[i][0] + ' ' + values[i][1] + '  | <b>Horario:</b> ' + values[i][2] + ' - ' + values[i][3];
 
-            texto.addEventListener('click', ()=>{
-                const informacion = document.getElementById('info');
-                const alerta = document.getElementById('alerta');
-                alerta.display = 'none';
-
-                const datos = document.createElement('p');
-                const boton = document.createElement('button');
-
-                datos.innerHTML = '<b>Paciente:</b> ' + 'values[i][0]' + ' ' + 'values[i][1]' + '<br><b>Horario:</b> ' + 'values[i][2]' + ' - ' + 'values[i][3]' + '<br><b>Doctor:</b> ' + 'values[i][4]' + '<br><b>Detalles:</b> ' + 'values[i][5]';
-                //config boton
-
-                ///const mensaje = document.getElementById('infoVacia');
-                //mensaje.display = 'none';
-                informacion.appendChild(datos);
-
-            });
+            
             // Agregamos el producto a la lista
             consulta.appendChild(texto);
             lista.appendChild(consulta);
         }
     });
 });
+
+//
+
+function imprimirDetalles(pacienteConsulta){
+    const informacion = document.getElementById('info');
+    const alerta = document.getElementById('infoVacia');
+    alerta.display = 'none';
+
+    const datos = document.createElement('p');
+    const boton = document.createElement('button');
+
+    datos.innerHTML = '<b>Paciente:</b> ' + pacienteConsutla[0] + ' ' + pacienteConsutla[1] + '<br><b>Horario:</b> ' + pacienteConsutla[2] + ' - ' + pacienteConsutla[3] + '<br><b>Doctor:</b> ' + pacienteConsutla[4] + '<br><b>Detalles:</b> ' + pacienteConsutla[5];
+    //config boton
+
+    ///const mensaje = document.getElementById('infoVacia');
+    //mensaje.display = 'none';
+    informacion.appendChild(datos);
+}
  
