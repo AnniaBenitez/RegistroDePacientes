@@ -68,6 +68,11 @@ select, input {
     margin: auto;
   }
 
+#obs{
+    min-height: 40px;
+    min-width: 100px;
+}
+
 @media screen and (max-width: 700px){
     nav, .row{
         flex-direction: column;
