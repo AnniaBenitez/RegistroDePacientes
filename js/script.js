@@ -1,7 +1,11 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7CkkuewPUd_fpGxyFASeD2EeXlzKFLk9GoIY3quPQdeff1MlkWJPT5cAgtwmLGIy1rfkF0XFxmK0CQL7CxjQUf3c767H7FdLBdco72irDYz-YJ_PFaybpUUjG-tZu4tvxGvCqoSjW-q_yAm4saIy4_V9saCgYKAecSARESFQG1tDrpVJJIZSytxB9DNQwNcKmAFg0163";
+  "ya29.a0AWY7CknmjK-i6ULnzFtvbqm4NE3UHnsHMue9hC_tBKwYTymuIB-Bu_cGeK0K0YuiHmCLpEoNhnOiKcnHTurcBb-FzdrpVPSRu_UCtD2c4uF6kTIHFY6kq36w6Qv9U8RI4U6IhartSjsEAWWiVkDsZFQTIWOPaCgYKAc8SARESFQG1tDrpBWJsVQpqmkwJJoQHaCxipQ0163";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
+
+const datos = document.getElementById('infoConsulta');
+const boton = document.getElementById('boton');
+boton.style.display = 'none';
 
 fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/enEspera`,
@@ -18,12 +22,13 @@ fetch(
     
         // Obtenemos el elemento del dom
         const lista = document.getElementById("formulario");
+
+        //Si se obtienen consultas, se borra esto:
         const alerta = document.getElementById('botones');
         alerta.style.display = 'none';
     
       //Se ordenan los elementos por fecha y hora 
-        //for(var i=0; i<values.length; i++){
-          
+        //for(var i=0; i<values.length; i++){          
         //}
 
         //Se imprimen los pacientes actuales que esperan consulta
@@ -31,37 +36,34 @@ fetch(
 
             const consulta = document.createElement("div");
             const texto = document.createElement("p");
+            const posicion = document.createElement('p');
+
             consulta.className =  "consulta-item";
+            posicion.className = 'posicion-item';
+            texto.className = 'texto';
 
-//Funcion que, al hacer click, debe imprimir todos los detalles AUN NO ANDA
-
-            //consulta.addEventListener('click', imprimirDetalles());
-            texto.className =  "texto";           
+            posicion.innerHTML = i;
             texto.innerHTML = '<b>Paciente:</b> ' + values[i][0] + ' ' + values[i][1] + '  | <b>Horario:</b> ' + values[i][2] + ' - ' + values[i][3];
-
             
             // Agregamos el producto a la lista
             consulta.appendChild(texto);
+            consulta.appendChild(posicion);
+            posicion.style.display = 'none';
             lista.appendChild(consulta);
+            consulta.setAttribute('onclick', 'imprimirDetalles()');
         }
     });
 });
 
-//
+function imprimirDetalles(){
 
-function imprimirDetalles(pacienteConsulta){
     const informacion = document.getElementById('info');
     const alerta = document.getElementById('infoVacia');
-    alerta.display = 'none';
 
-    const datos = document.createElement('p');
-    const boton = document.createElement('button');
+    datos.innerHTML = '';
+    alerta.style.display = 'none';
 
-    datos.innerHTML = '<b>Paciente:</b> ' + pacienteConsutla[0] + ' ' + pacienteConsutla[1] + '<br><b>Horario:</b> ' + pacienteConsutla[2] + ' - ' + pacienteConsutla[3] + '<br><b>Doctor:</b> ' + pacienteConsutla[4] + '<br><b>Detalles:</b> ' + pacienteConsutla[5];
-    //config boton
-
-    ///const mensaje = document.getElementById('infoVacia');
-    //mensaje.display = 'none';
-    informacion.appendChild(datos);
+    datos.innerHTML = '<b>Paciente:</b> ' + 'pacienteConsutla[0]' + ' ' + 'pacienteConsutla[1]' + '<br><b>Horario:</b> ' + 'pacienteConsutla[2]' + ' - ' + 'pacienteConsutla[3]' + '<br><b>Doctor:</b> ' + 'pacienteConsutla[4]' + '<br><b>Detalles:</b> ' + 'pacienteConsutla[5]';
+    boton.style.display = 'block';
 }
  
