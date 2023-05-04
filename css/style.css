@@ -70,7 +70,7 @@ footer{
 }
 
 .consulta-item{
-    margin: 2% 3% 5% 3%;          /*arriba derecha abajo izquierda*/
+    margin: 2% 3% 2% 3%;          /*arriba derecha abajo izquierda*/
     padding: 0.2%;
     background-color: rgb(244, 170, 143);
     border-radius: 5px;
