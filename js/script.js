@@ -1,5 +1,5 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7CklZwRjMPMw7WZhgEc9ROkRWoBja8MkIoPazZSKiaHoMkKM1J2s-QXZFcF70HrrNOgGyUUUuU5IBBoXciCCrdKm_cpg6ZOfhZcBTbW3vT-tRiZJwqBGz0wr4tqx_oAqxc0JIlAsGRSemKVyMkxjHSbTJ7EgaCgYKAS0SARESFQG1tDrp86ExCfAXKLdQjnIrZK6M7w0166";
+  "ya29.a0AWY7CknmBFy9tD-sMPfcmlZ0FRLw9e1nSgWaK0VF-59yHq0luZO4UZlf2MgyjJ8NOq8gw8gCRWGkdBd8qSDCgKznmi-qnoxs791LYCxseU8SgFEEW6XFKC-YBCLXRDQh1h5_n3jFPr9ywA5AiQF80arToT381RUaCgYKAcgSARESFQG1tDrp8B7wwI9xlurXJ1vUcPjptQ0166";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
@@ -84,32 +84,73 @@ const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
 
 
+const fatForm = document.getElementById('formulario')
+const fatInfo = document.getElementById('info')
 
-let date
-// let imageUrl
 
-const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/enEspera`
-//const url2 = 'https://jsonplaceholder.typicode.com/todos/1'
-const getApi = async () => {
-  const resp = await fetch(url
-    ,{
-    headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-    },    
-})
-    const respuesta = await resp.json()
- // return respuesta
-    date = respuesta.Nombre
-//   imageUrl = respuesta.url
-    console.log('dfhghg')
+
+const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/consultas`
+//const url2 = 'https://jsonplaceholder.typicode.com/users'
+
+// Función que se ejecuta después de obtener los datos de la API
+function procesarDatos(data) {
+  let datt = data
+
+
+  //para agregar que si asistio o no el paciente
+  function pacAsistio() {
+    
+  }
+
+  function showData(event) {
+    const obtBott = event.target.innerText;
+    const getPaciente = obtBott.split(" ")[1];
+    for(let i=0; i< datt.length; i++){
+      if(datt[i][1] == getPaciente){
+//        console.log('en el for'+datt[i][1])
+        const infoDoc = document.getElementById('doc')
+        infoDoc.innerHTML = `<b>Doctor: </b> ${datt[i][4]}`
+        const infoHora = document.getElementById('hora')
+        infoHora.innerHTML = `<b>Fecha: </b> ${datt[i][3]}`
+        const infoObs = document.getElementById('obs')
+        infoObs.innerHTML = `<b>Observacion:</b> ${datt[i][5]}`
+      }
+    }  
+  }
+
+  for(let i=0; i< data.length; i++){
+
+    // console.log('en el for ya'+data[i][0])
+
+    const consulta = document.createElement('div');
+    consulta.className = "buttonTwo";
+    consulta.onclick = showData
+    fatForm.appendChild(consulta);
+    consulta.innerHTML = `<b>Paciente:</b> ${data[i][1]} ${data[i][2]} | <b>Fecha:</b> ${data[i][3]}`
+    //consulta.innerHTML = ` <p id='texto'>${data[i].name}</p>`
+  }
+
 }
 
-getApi().then(() => {
-  const dateElement = document.getElementById('h1')
-  //const imageUrlElement = document.getElementById('imagenUrl')
-  dateElement.innerHTML += 
-  console.log(date)
-  //imageUrlElement.src = imageUrl
-})
+fetch(url,{
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${ACCESS_TOKEN}`,
+          },    
+      }
+  )
+  .then(response => response.json()) 
+  .then(data => {
 
+    // for(let i=0; i< data.values.length; i++){
+    //   console.log('paso')
+    //   console.log(data.values[i][0])
+    // }
+
+
+    procesarDatos(data.values)
+  })
+  .catch(error => console.error(error)); 
+
+
+  

@@ -6,7 +6,8 @@
         <link rel="stylesheet" href="./css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">        
     </head>
-    <script type="text/javascript" src="./js/script.js"></script>
+
+
     <body>
 
         <nav>
@@ -15,15 +16,18 @@
             <a class="enlace" href="./archivos/atendidos.html">Pacientes Atendidos</a>
             <a class="enlace" href="./archivos/doctores.html">Doctores</a>
         </nav>
-        
         <div class="row">
 
             <aside>
                     <article class="logo">
                         <img id = 'decoracion' src="./img/logodescri.png">
                     </article> 
-                    <article class="info">
+                    <article id="info">
                         <h2>Información:</h2>
+                        <p id="doc"></p>
+                        <p id="hora"></p>
+                        <p id="obs"></p>
+                        <button id="boton" onclick="pacAsistio()">Asistio</button>
                    </article>
                     
                 
@@ -35,16 +39,14 @@
                     <h2>Pacientes en espera:</h2>
                 </article>
 
-                <article class="formulario">
-                    <!--Un boton por paciente, nombre y fecha. Al presionar sale en el aside-->
-                    <h1 id="h1">ho</h1>
-                    <div id="paciente" class="button" onclick="onRegistrarDato()">nombre de paciente</div>
+                <div id="formulario">
                     <p id="botones">Sin pacientes en la lista...</p>
-                </article>
+                </div>
 
             </section>
 
         </div>
     </body>
+    <script  src="./js/script.js" defer></script>
 
 </html>
