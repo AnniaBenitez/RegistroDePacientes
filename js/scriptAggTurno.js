@@ -71,7 +71,7 @@ fetch(
 
             const doctor = document.createElement("option");            
             doctor.className =  "opcionDoc";
-            doctor.innerHTML = 'Dr. ' + values[i][0]; 
+            doctor.innerHTML = values[i][0]; 
             lista.appendChild(doctor);
         }        
     });

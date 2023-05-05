@@ -30,7 +30,7 @@ fetch(
             // Nombre del doctor en lista
             const doctorName = document.createElement("li");
             doctorName.className = "nombre doc";
-            doctorName.innerHTML = 'Dr.' + values[i][0]; 
+            doctorName.innerHTML = values[i][0]; 
     
             // otros datos del doc tipo p
             const fechaDisp = document.createElement("p");

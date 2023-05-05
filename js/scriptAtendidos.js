@@ -40,7 +40,7 @@ fetch(
 
                 const doctor = document.createElement('p');
                 doctor.className='doctor';
-                doctor.innerHTML = 'Atendido por: Dr. ' + values[i][4];
+                doctor.innerHTML = 'Atendido por: ' + values[i][4];
         
                 const obs = document.createElement('p');
                 obs.className='observacion';
