@@ -1,5 +1,9 @@
 const ACCESS_TOKEN =
+<<<<<<< HEAD
   "ya29.a0AWY7CklZwRjMPMw7WZhgEc9ROkRWoBja8MkIoPazZSKiaHoMkKM1J2s-QXZFcF70HrrNOgGyUUUuU5IBBoXciCCrdKm_cpg6ZOfhZcBTbW3vT-tRiZJwqBGz0wr4tqx_oAqxc0JIlAsGRSemKVyMkxjHSbTJ7EgaCgYKAS0SARESFQG1tDrp86ExCfAXKLdQjnIrZK6M7w0166";
+=======
+  "ya29.a0AWY7CkmYpC-KjYcnd6uWCNLeOelt7JgBPms1xUwspodUAgBlTHImg_Cs5DvSl-CgZbvMHHy_JX3zB-3givdT1VkOcQpHMG8BZDd0i7LtmthtZHLu2RbxPNBINX5WTWSyG5LFYPHxbX9OiHCRR88LB_8KKE8ssBAaCgYKASYSARESFQG1tDrpmYKJbl1ECONjBpXcI4sznw0166";
+>>>>>>> master
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
@@ -30,7 +34,7 @@ fetch(
             // Nombre del doctor en lista
             const doctorName = document.createElement("li");
             doctorName.className = "nombre doc";
-            doctorName.innerHTML = 'Dr.' + values[i][0]; 
+            doctorName.innerHTML = values[i][0]; 
     
             // otros datos del doc tipo p
             const fechaDisp = document.createElement("p");

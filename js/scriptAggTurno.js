@@ -1,5 +1,9 @@
 const ACCESS_TOKEN =
+<<<<<<< HEAD
   "ya29.a0AWY7CklZwRjMPMw7WZhgEc9ROkRWoBja8MkIoPazZSKiaHoMkKM1J2s-QXZFcF70HrrNOgGyUUUuU5IBBoXciCCrdKm_cpg6ZOfhZcBTbW3vT-tRiZJwqBGz0wr4tqx_oAqxc0JIlAsGRSemKVyMkxjHSbTJ7EgaCgYKAS0SARESFQG1tDrp86ExCfAXKLdQjnIrZK6M7w0166";
+=======
+  "ya29.a0AWY7CkmYpC-KjYcnd6uWCNLeOelt7JgBPms1xUwspodUAgBlTHImg_Cs5DvSl-CgZbvMHHy_JX3zB-3givdT1VkOcQpHMG8BZDd0i7LtmthtZHLu2RbxPNBINX5WTWSyG5LFYPHxbX9OiHCRR88LB_8KKE8ssBAaCgYKASYSARESFQG1tDrpmYKJbl1ECONjBpXcI4sznw0166";
+>>>>>>> master
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
@@ -8,29 +12,30 @@ document.getElementById('fecha').valueAsDate = new Date();
 function onRegistrarDato(){
 
     //Se obtienen los datos
-    const NOMBRE = document.getElementById('nombre').value;
-    const APELLIDO = document.getElementById('apellido').value;
-    const DOCTOR = document.getElementById('doctor').value;
-    const FECHA = document.getElementById('fecha').value;
-    const HORARIOS = document.getElementById('horarios').value;
-    const OBS = document.getElementById('obs').value;
+    let NOMBRE = document.getElementById('nombre').value;
+    let APELLIDO = document.getElementById('apellido').value;
+    let DOCTOR = document.getElementById('doctor').value;
+    let FECHA = document.getElementById('fecha').value;
+    //let HORARIOS = document.getElementById('horarios').value;
+    let OBS = document.getElementById('obs').value;
+    let ID = document.getElementById('ID').value;
 
-    if(NOMBRE == null || APELLIDO == null || DOCTOR == 'Seleccionar' || FECHA == 'Seleccionar' || OBS == null){
+    if(NOMBRE == null || APELLIDO == null || DOCTOR == 'Seleccionar' || FECHA == 'Seleccionar' || OBS == null || ID == null){
         alert('Debe completar todos los datos!!');
         return;
     }
     else{
         let data = {};
         let values = [];
-        let fila = [NOMBRE, APELLIDO, FECHA, HORARIOS, DOCTOR, OBS, false];
+        let fila = [ID, NOMBRE, APELLIDO, FECHA, /*HORARIOS,*/ DOCTOR, OBS, false];
         
         values.push(fila);
-        data.range = "enEspera";
+        data.range = "consultas";
         data.majorDimension = "ROWS";
         data.values = values;
 
         fetch(
-            `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/enEspera:append?valueInputOption=USER_ENTERED`,
+            `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas:append?valueInputOption=USER_ENTERED`,
             {
             method: 'POST',
                 headers: {
@@ -41,11 +46,38 @@ function onRegistrarDato(){
             }
         ).then(function (response) {
             response.json().then(function (data) {
-        
+                window.location.reload();
             });
         });
-        window.location.reload();
+        
     }
-
     
 }
+
+fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/doctores`,
+    {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },    
+    }
+).then(function (response) {
+    //esperamos el json del response para poder utilizarlo
+    response.json().then(function (data) {
+        const values = data.values;
+    
+        // Obtenemos el elemento del dom
+        const lista = document.getElementById("doctor");  
+        //const lista2 = document.getElementById('horarios');  
+    
+        for (var i = 1; i < values.length; i++) {
+
+            const doctor = document.createElement("option");            
+            doctor.className =  "opcionDoc";
+            doctor.innerHTML = values[i][0]; 
+            lista.appendChild(doctor);
+        }        
+    });
+});
+
