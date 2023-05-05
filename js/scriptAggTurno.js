@@ -14,23 +14,24 @@ function onRegistrarDato(){
     let FECHA = document.getElementById('fecha').value;
     //let HORARIOS = document.getElementById('horarios').value;
     let OBS = document.getElementById('obs').value;
+    let ID = document.getElementById('ID').value;
 
-    if(NOMBRE == null || APELLIDO == null || DOCTOR == 'Seleccionar' || FECHA == 'Seleccionar' || OBS == null){
+    if(NOMBRE == null || APELLIDO == null || DOCTOR == 'Seleccionar' || FECHA == 'Seleccionar' || OBS == null || ID == null){
         alert('Debe completar todos los datos!!');
         return;
     }
     else{
         let data = {};
         let values = [];
-        let fila = [NOMBRE, APELLIDO, FECHA, /*HORARIOS,*/ DOCTOR, OBS, false];
+        let fila = [ID, NOMBRE, APELLIDO, FECHA, /*HORARIOS,*/ DOCTOR, OBS, false];
         
         values.push(fila);
-        data.range = "enEspera";
+        data.range = "consultas";
         data.majorDimension = "ROWS";
         data.values = values;
 
         fetch(
-            `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/enEspera:append?valueInputOption=USER_ENTERED`,
+            `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas:append?valueInputOption=USER_ENTERED`,
             {
             method: 'POST',
                 headers: {
