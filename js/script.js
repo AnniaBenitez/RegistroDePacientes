@@ -1,11 +1,13 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7CknUTlzgH87R8TK7pcd45WfCU4b4FYPyct5xXL15g78CXFpVDWgGzEDWm7bQ0YSvW_8y9Ic6dPFWg_QkwTW3jJCLKUuR40x8e5pPZf-S_gO1RZB8wlZfWdc_LETxqYOae0dw7MWo5gVPOQvXwYXdEFZ9aCgYKAeQSARESFQG1tDrp2C0cUX0TC8mUC3eic-lqYw0163";
+  "ya29.a0AWY7CkmeW9KVkPEQJFlgfzprNOwochyde1k5WSpkDIffF7hq4oOgL8D9ei_0csmIUR-B2hXiiH2ss_MFVp7QCmWpMdy7T7WFlFgRA0AWCks6fAMVooIiIzQT_N3Txp0SJ6Xz3HtPEbxqApmm4EF2QrQXsHY3aCgYKAWwSARESFQG1tDrpJb9xWQc7XUUAZNQnPOyEnw0163";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
-const fatForm = document.getElementById('formulario')
-const infoPaciente = document.getElementById('infoPaciente')
-const fatInfo = document.getElementById('info')
-const buttonAsistencia = document.getElementById('boton')
+const fatForm = document.getElementById('formulario');
+const infoPaciente = document.getElementById('infoPaciente');
+const fatInfo = document.getElementById('info');
+const buttonAsistencia = document.getElementById('boton');
+buttonAsistencia.style.display = 'none';
+const aviso = document.getElementById('botones');
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/consultas`
 //const url2 = 'https://jsonplaceholder.typicode.com/users'
@@ -32,7 +34,9 @@ function procesarDatos(data) {
     
     const obtBott = event.target.innerText;
     const getPaciente = obtBott.split(" ")[1];
-    let poscPaciente
+    let poscPaciente;
+    
+
     for(let i=0; i< datt.length; i++){
       
 
@@ -46,7 +50,7 @@ function procesarDatos(data) {
         infoHora.innerHTML = `<b>Fecha: </b> ${datt[i][3]}`
         const infoObs = document.getElementById('obs')
         infoObs.innerHTML = `<b>Observacion:</b> ${datt[i][5]}`
-
+        buttonAsistencia.style.display = 'block';
       }
     }
     buttonAsistencia.addEventListener('click',() => {
@@ -59,13 +63,13 @@ function procesarDatos(data) {
     }) 
   }
 
-  for(let i=0; i< data.length; i++){
+  for(let i=1; i< data.length; i++){
 
     const consulta = document.createElement('div');
     consulta.className = "buttonTwo";
     consulta.onclick = showData
     fatForm.appendChild(consulta);
-    consulta.innerHTML = `<p id='texto'><b>Paciente:</b> ${data[i][0]}  ${data[i][1]} ${data[i][2]} | <b>Fecha:</b> ${data[i][3]} </p>`
+    consulta.innerHTML = `<p id='texto'><b>Paciente:</b> ${data[i][0]} - ${data[i][1]} ${data[i][2]} | <b>Fecha:</b> ${data[i][3]} </p>`
 
   }
 
@@ -80,7 +84,8 @@ fetch(url,{
   )
   .then(response => response.json()) 
   .then(data => {
-    procesarDatos(data.values)
+    procesarDatos(data.values);
+    aviso.style.display = 'none';
   })
   .catch(error => console.error(error)); 
 
