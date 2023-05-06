@@ -1,11 +1,7 @@
-const ACCESS_TOKEN =  "ya29.a0AWY7CkmFiqGL73csD7m6TMrDnPp6UOgnwojyuN8NbuXbI_i0s0u-d8zkz55nlBotxIwIVrB9XiwKs0FrBtUjeSKUWzAm_vRCKHQFI4iAzodFOFtEpeLfWbRJwBQI3mNwGwsRlijYU2Jg-19ehK5J2S4Uuh0asysaCgYKAY8SARESFQG1tDrp0iVddpi1aJMFpNZ9uFHiaw0166";
- 
-const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
-
 document.getElementById('fecha').valueAsDate = new Date();
 
 //Cuando se presiona el boton para registrar datos:
-function onRegistrarDato(){
+async function onRegistrarDato(){
 
     //Se obtienen los datos
     let NOMBRE = document.getElementById('nombre').value;
@@ -23,59 +19,49 @@ function onRegistrarDato(){
     else{
         //si todo esta completo, se hace un array de los datos ingresados
         //y se pasa el array al api
-        let data = {};
-        let values = [];
-        let fila = [ID, NOMBRE, APELLIDO, FECHA, DOCTOR, OBS, false];
-        
-        values.push(fila);
-        data.range = "consultas";
-        data.majorDimension = "ROWS";
-        data.values = values;
-
         //Hace la peticion a la api
-        fetch(
-            `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas:append?valueInputOption=USER_ENTERED`,
-            {
-            method: 'POST',
+        try{
+            await fetch('https://sheet.best/api/sheets/96f11b79-5f1e-4298-9f2f-5ef6135e0bc3',{
+                method : 'POST',
+                mode : 'cors',
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${ACCESS_TOKEN}`,
-                },
-            body: JSON.stringify(data)
-            }
-        ).then(function (response) {
-            response.json().then(function (data) {
-                window.location.reload();
+                },    
+                body: JSON.stringify({
+                    'ID' : ID,
+                    'Nombre' : NOMBRE,
+                    'Apellido' : APELLIDO,
+                    'Fecha': FECHA,
+                    'Doctor': DOCTOR,
+                    'Detalle': OBS
+                })
             });
-        });
-        
+         window.location.reload();
+    }catch(error){
+        console.log(error);
+    }
+
     }
     
 }
 
-//Se rellena el select con los nombres de los doctores 
-fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/doctores`,
-    {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },    
-    }
-).then(function (response) {
-    //esperamos el json del response para poder utilizarlo
-    response.json().then(function (data) {
-        const values = data.values;
-    
+//Carga toda la lista de doctores en el select
+window.addEventListener('load', cargarDocs());
+async function cargarDocs(){
+    try{
+        const respuesta = await fetch('https://sheet.best/api/sheets/de6788c9-d9d2-4fb4-aa1b-01c0e5f9a0b1');
+        const contenido = await respuesta.json();
         // Obtenemos el elemento del dom
-        const lista = document.getElementById("doctor");   
-    
-        for (var i = 1; i < values.length; i++) {
+        const lista = document.getElementById("doctor");      
+        for (var i = 0; i < contenido.length; i++) {
             const doctor = document.createElement("option");            
             doctor.className =  "opcionDoc";
-            doctor.innerHTML = values[i][0]; 
+            doctor.innerHTML = contenido[i]['Nombre']; 
             lista.appendChild(doctor);
-        }        
-    });
-});
+        }   
+    }catch(error){
+    console.log(error);
+    }  
+}
+
 
