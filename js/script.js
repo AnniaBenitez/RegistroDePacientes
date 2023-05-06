@@ -6,7 +6,8 @@ const fatForm = document.getElementById('formulario');
 const infoPaciente = document.getElementById('infoPaciente');
 const fatInfo = document.getElementById('info');
 const aviso = document.getElementById('botones');
-
+const hoy = new Date();
+console.log(hoy);
 const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/consultas`
 
 // Función que se ejecuta después de obtener los datos de la API
@@ -30,7 +31,7 @@ function procesarDatos(data) {
   }
   //para agregar al DOM los pacientes con turno
   for(let i=1; i< data.length; i++){
-    if(data[i][6] == 'FALSE'){
+    if(Date.parse(data[i][3]) > hoy){
       const consulta = document.createElement('div');
       consulta.className = "buttonTwo";
       consulta.onclick = showData
