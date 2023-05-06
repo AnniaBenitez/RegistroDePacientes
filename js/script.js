@@ -8,7 +8,7 @@ const hoy = new Date();
 function procesarDatos(data) {
   //para agregar al DOM los pacientes con turno
   for(let i=0; i< data.length; i++){
-    if(Date.parse(data[i]['Fecha']) >= hoy){
+    if(Date.parse(data[i]['Fecha']) > hoy){
       const consulta = document.createElement('div');
       consulta.className = "buttonTwo";      
       fatForm.appendChild(consulta);
