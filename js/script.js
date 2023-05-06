@@ -31,7 +31,7 @@ function procesarDatos(data) {
   }
   //para agregar al DOM los pacientes con turno
   for(let i=1; i< data.length; i++){
-    if(Date.parse(data[i][3]) > hoy){
+    if(Date.parse(data[i][3]) < hoy){
       const consulta = document.createElement('div');
       consulta.className = "buttonTwo";
       consulta.onclick = showData
