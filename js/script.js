@@ -5,9 +5,7 @@ const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 const fatForm = document.getElementById('formulario');
 const infoPaciente = document.getElementById('infoPaciente');
 const fatInfo = document.getElementById('info');
-const buttonAsistencia = document.getElementById('boton');
 
-buttonAsistencia.style.display = 'none';
 const aviso = document.getElementById('botones');
 let cadena = [];
 
@@ -46,7 +44,6 @@ function procesarDatos(data) {
         infoHora.innerHTML = `<b>Fecha: </b> ${datt[i][3]}`
         const infoObs = document.getElementById('obs')
         infoObs.innerHTML = `<b>Observacion:</b> ${datt[i][5]}`
-        buttonAsistencia.style.display = 'block';
       }
     }
   }
