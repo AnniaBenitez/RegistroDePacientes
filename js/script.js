@@ -1,43 +1,24 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7Cknj5-S-Ai9qWYFqrB3LfjhBHuKrooUUg05IpemT8HpLCar2Xgc3FdLOv0kuh09DUWEE-xy7wBIILblksOWvibdCyGrIOWA42XcoOcM9hVvrHcUqXfj8snh-9kDjbfB3hr3iyhTR4JWXpb2JV0Ee-BXkMhgaCgYKAXYSARESFQG1tDrpSvdyanZ9KKfVpoYIwzHB_g0166";
+  "ya29.a0AWY7CklKYRN9DJs4S7Pef02Y7NgoOy_qZ5T9McE-3oTBfRYn42vTZztgJG8h4aGn1KRUsj2k5tmrnntszaDT517mfd8UKcSApFQw_oI9PlJVrlDwhpealkNxcLHZ0QNEQfLsl0Mwbgpm9G5FEt2QHqun7WzsaCgYKAa4SARESFQG1tDrpsBIbKzxFcGyxkorzZZWViQ0163";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 const fatForm = document.getElementById('formulario');
 const infoPaciente = document.getElementById('infoPaciente');
 const fatInfo = document.getElementById('info');
-
 const aviso = document.getElementById('botones');
-let cadena = [];
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/consultas`
-//const url2 = 'https://jsonplaceholder.typicode.com/users'
-
-
-
-  //para agregar que si asistio o no el paciente
-
 
 // Función que se ejecuta después de obtener los datos de la API
 function procesarDatos(data) {
   let datt = data
-
-
-  // buttonAsistencia.addEventListener('click', function(){
-  //   console.log(datt[])
-  // })
-
+//para obtener los datos de los pacientes
   function showData(event) {
-    
     const obtBott = event.target.innerText;
     const getPaciente = obtBott.split(" ")[1];
-    let poscPaciente;
-    
-
+    //mostrar los datos mas especificos de cada paciente
     for(let i=0; i< datt.length; i++){
-      
-
       if(datt[i][0] == getPaciente){
-        poscPaciente = i
         const infoDoc = document.getElementById('doc')
         infoDoc.innerHTML = `<b>Doctor: </b> ${datt[i][4]}`
         const infoHora = document.getElementById('hora')
@@ -47,28 +28,7 @@ function procesarDatos(data) {
       }
     }
   }
-
-
-
-    //buttonAsistencia.addEventListener('click',() => {
-      //HACER QUE LA CASILLA DESAPAREZCA AL MARCARSE COMO CONSULTADA
-      //obtenerBott.style.display = 'none';
-      // Agregar código para actualizar el valor en la hoja de cálculo aquí
-      //fetch('https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas', {
-      //  method : 'DELETE',
-      //  headers: {
-       //   "Content-Type": "application/json",
-      //    Authorization: `Bearer ${ACCESS_TOKEN}`,
-      //},
-      //}).then(response => console.log(response.status));
-
-
-
-    //}) 
-  //}
-
-
-
+  //para agregar al DOM los pacientes con turno
   for(let i=1; i< data.length; i++){
     if(data[i][6] == 'FALSE'){
       const consulta = document.createElement('div');
@@ -80,7 +40,7 @@ function procesarDatos(data) {
   }
 
 }
-
+//peticion de los datos a la api
 fetch(url,{
           headers: {
               "Content-Type": "application/json",

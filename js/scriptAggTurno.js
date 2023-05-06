@@ -1,10 +1,10 @@
-const ACCESS_TOKEN =  "ya29.a0AWY7Cknj5-S-Ai9qWYFqrB3LfjhBHuKrooUUg05IpemT8HpLCar2Xgc3FdLOv0kuh09DUWEE-xy7wBIILblksOWvibdCyGrIOWA42XcoOcM9hVvrHcUqXfj8snh-9kDjbfB3hr3iyhTR4JWXpb2JV0Ee-BXkMhgaCgYKAXYSARESFQG1tDrpSvdyanZ9KKfVpoYIwzHB_g0166";
-
+const ACCESS_TOKEN =  "ya29.a0AWY7CklKYRN9DJs4S7Pef02Y7NgoOy_qZ5T9McE-3oTBfRYn42vTZztgJG8h4aGn1KRUsj2k5tmrnntszaDT517mfd8UKcSApFQw_oI9PlJVrlDwhpealkNxcLHZ0QNEQfLsl0Mwbgpm9G5FEt2QHqun7WzsaCgYKAa4SARESFQG1tDrpsBIbKzxFcGyxkorzZZWViQ0163";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
 document.getElementById('fecha').valueAsDate = new Date();
 
+//Cuando se presiona el boton para registrar datos:
 function onRegistrarDato(){
 
     //Se obtienen los datos
@@ -15,11 +15,14 @@ function onRegistrarDato(){
     let OBS = document.getElementById('obs').value;
     let ID = document.getElementById('ID').value;
 
+    //Se verifica que todas las casillas esten completas
     if(NOMBRE == null || APELLIDO == null || DOCTOR == 'Seleccionar' || FECHA == 'Seleccionar' || OBS == null || ID == null){
         alert('Debe completar todos los datos!!');
         return;
     }
     else{
+        //si todo esta completo, se hace un array de los datos ingresados
+        //y se pasa el array al api
         let data = {};
         let values = [];
         let fila = [ID, NOMBRE, APELLIDO, FECHA, DOCTOR, OBS, false];
@@ -29,6 +32,7 @@ function onRegistrarDato(){
         data.majorDimension = "ROWS";
         data.values = values;
 
+        //Hace la peticion a la api
         fetch(
             `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas:append?valueInputOption=USER_ENTERED`,
             {
@@ -49,6 +53,7 @@ function onRegistrarDato(){
     
 }
 
+//Se rellena el select con los nombres de los doctores 
 fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/doctores`,
     {
@@ -63,11 +68,9 @@ fetch(
         const values = data.values;
     
         // Obtenemos el elemento del dom
-        const lista = document.getElementById("doctor");  
-        //const lista2 = document.getElementById('horarios');  
+        const lista = document.getElementById("doctor");   
     
         for (var i = 1; i < values.length; i++) {
-
             const doctor = document.createElement("option");            
             doctor.className =  "opcionDoc";
             doctor.innerHTML = values[i][0]; 

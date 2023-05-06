@@ -1,8 +1,9 @@
 const ACCESS_TOKEN =
-'ya29.a0AWY7Cknj5-S-Ai9qWYFqrB3LfjhBHuKrooUUg05IpemT8HpLCar2Xgc3FdLOv0kuh09DUWEE-xy7wBIILblksOWvibdCyGrIOWA42XcoOcM9hVvrHcUqXfj8snh-9kDjbfB3hr3iyhTR4JWXpb2JV0Ee-BXkMhgaCgYKAXYSARESFQG1tDrpSvdyanZ9KKfVpoYIwzHB_g0166'
+'ya29.a0AWY7CklKYRN9DJs4S7Pef02Y7NgoOy_qZ5T9McE-3oTBfRYn42vTZztgJG8h4aGn1KRUsj2k5tmrnntszaDT517mfd8UKcSApFQw_oI9PlJVrlDwhpealkNxcLHZ0QNEQfLsl0Mwbgpm9G5FEt2QHqun7WzsaCgYKAa4SARESFQG1tDrpsBIbKzxFcGyxkorzZZWViQ0163'
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 
+//Se obtienen los datos de la API
 fetch(
     'https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/doctores',
     {
@@ -19,9 +20,8 @@ fetch(
         // Obtenemos el elemento del dom
         const lista = document.getElementById("doctores");
         const alerta = document.getElementById('alerta');
-        alerta.style.display = 'none';
-    
-    
+        
+        //Se escriben los datos del doctor uno a uno    
         for (var i = 1; i < values.length; i++) {
 
             const doctor = document.createElement("div");
@@ -54,6 +54,7 @@ fetch(
             // Agregamos el producto a la lista
             lista.appendChild(doctor);
         }
+        alerta.style.display = 'none';
     });
 });
  
