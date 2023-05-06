@@ -6,10 +6,7 @@
         <link rel="stylesheet" href="./css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">        
     </head>
-
-
     <body>
-
         <nav>
             <a class="enlace" href="./index.html">Inicio</a>
             <a class="enlace" href="./archivos/agregarTurno.html">Nuevo turno</a>
@@ -17,42 +14,27 @@
             <a class="enlace" href="./archivos/doctores.html">Doctores</a>
         </nav>
         <div class="row">
-
             <aside>
                     <article class="logo">
                         <img id = 'decoracion' src="./img/logodescri.png">
                     </article> 
-
                     <article id="info">
                         <h2>Información:</h2>
                         <p id="doc"></p>
                         <p id="hora"></p>
                         <p id="obs"></p>
-                        <button id="boton" onclick="pacAsistio()">Asistio</button>
-
-
-                   </article>
-                    
-                
+                        <button id="boton">Asistio</button>
+                   </article>       
             </aside>
-
             <section>
-
                 <article class="titulo">
-                    <h2>Pacientes en espera:</h2>
+                    <h2 id="infoPaciente">Pacientes en espera:</h2>
                 </article>
-
-
                 <div id="formulario">
                     <p id="botones">Sin pacientes en la lista...</p>
                 </div>
-
-
-
             </section>
-
         </div>
-        <script src="./js/script.js" defer></script>
     </body>
     <script  src="./js/script.js" defer></script>
 
