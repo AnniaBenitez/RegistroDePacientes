@@ -1,13 +1,15 @@
 const ACCESS_TOKEN =
-  "ya29.a0AWY7CkmeW9KVkPEQJFlgfzprNOwochyde1k5WSpkDIffF7hq4oOgL8D9ei_0csmIUR-B2hXiiH2ss_MFVp7QCmWpMdy7T7WFlFgRA0AWCks6fAMVooIiIzQT_N3Txp0SJ6Xz3HtPEbxqApmm4EF2QrQXsHY3aCgYKAWwSARESFQG1tDrpJb9xWQc7XUUAZNQnPOyEnw0163";
+  "ya29.a0AWY7CkmwPBol9KKFzcmz__LHuM1hPiWHtM43DzHKPk_ZtmkvmfVIGdnxHc978cD7PNfN6ghh8n9P0R16QJ7Di_ame146p3LNE-skTpiUcemQdjJCqCh2WokIsT6lz-Dl2Efbtuzzbd8hUu7uGgELRwgBfglrPoYaCgYKAaUSARESFQG1tDrplGqnvYzpzL_0olP-OREXFA0166";
  
 const SHEET_ID = '1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko';
 const fatForm = document.getElementById('formulario');
 const infoPaciente = document.getElementById('infoPaciente');
 const fatInfo = document.getElementById('info');
 const buttonAsistencia = document.getElementById('boton');
+
 buttonAsistencia.style.display = 'none';
 const aviso = document.getElementById('botones');
+let cadena = [];
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6TzphvumLt13yNMOBjEITNfKToko/values/consultas`
 //const url2 = 'https://jsonplaceholder.typicode.com/users'
@@ -20,11 +22,7 @@ const url = `https://sheets.googleapis.com/v4/spreadsheets/1Se6P1VkG8IlgK2N6Tzph
 // Función que se ejecuta después de obtener los datos de la API
 function procesarDatos(data) {
   let datt = data
-  if(datt[0] == undefined){
 
-    infoPaciente.style.display = 'none'
-    console.log('no funciona')
-  }
 
   // buttonAsistencia.addEventListener('click', function(){
   //   console.log(datt[])
@@ -42,8 +40,6 @@ function procesarDatos(data) {
 
       if(datt[i][0] == getPaciente){
         poscPaciente = i
-        console.log('el i es'+i)
-//        console.log('en el for'+datt[i][1])
         const infoDoc = document.getElementById('doc')
         infoDoc.innerHTML = `<b>Doctor: </b> ${datt[i][4]}`
         const infoHora = document.getElementById('hora')
@@ -53,45 +49,28 @@ function procesarDatos(data) {
         buttonAsistencia.style.display = 'block';
       }
     }
-    buttonAsistencia.addEventListener('click',() => {
-      pos = 2
-      console.log(poscPaciente)
-      console.log(datt[poscPaciente][6])
-      console.log(`ahora es ${datt[poscPaciente][6]}`)
-      datt[poscPaciente][6] = true
-      console.log(`se cambio a ${datt[poscPaciente][6]}`)
-      // Agregar código para actualizar el valor en la hoja de cálculo aquí
-
-      let data = {};
-      let values = [];
-      let fila = ['TRUE'];
-      
-      values.push(fila);
-      data.range = "consultas";
-      data.majorDimension = "ROWS";
-      data.values = values;
-
-      fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas!G${pos}:append?valueInputOption=USER_ENTERED`,
-        {
-        method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-        body: JSON.stringify(data)
-        }
-    ).then(function (response) {
-        response.json().then(function (data) {
-        });
-    });
-
-
-
-
-
-    }) 
   }
+
+
+
+    //buttonAsistencia.addEventListener('click',() => {
+      //HACER QUE LA CASILLA DESAPAREZCA AL MARCARSE COMO CONSULTADA
+      //obtenerBott.style.display = 'none';
+      // Agregar código para actualizar el valor en la hoja de cálculo aquí
+      //fetch('https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas', {
+      //  method : 'DELETE',
+      //  headers: {
+       //   "Content-Type": "application/json",
+      //    Authorization: `Bearer ${ACCESS_TOKEN}`,
+      //},
+      //}).then(response => console.log(response.status));
+
+
+
+    //}) 
+  //}
+
+
 
   for(let i=1; i< data.length; i++){
     if(data[i][6] == 'FALSE'){
