@@ -2,13 +2,14 @@ const fatForm = document.getElementById('formulario');
 const infoPaciente = document.getElementById('infoPaciente');
 const fatInfo = document.getElementById('info');
 const aviso = document.getElementById('botones');
-const hoy = new Date();
+const hoy = new Date( new Date() - (24*60*60*1000)); //el dia de ayer
 
 // Función que se ejecuta después de obtener los datos de la API
 function procesarDatos(data) {
   //para agregar al DOM los pacientes con turno
   for(let i=0; i< data.length; i++){
-    if(Date.parse(data[i]['Fecha']) < hoy){
+
+    if(Date.parse(data[i]['Fecha']) > hoy){
       const consulta = document.createElement('div');
       consulta.className = "buttonTwo";      
       fatForm.appendChild(consulta);
