@@ -113,25 +113,26 @@ footer{
     cursor: pointer;
     margin: auto;
   }
-
-.button {
-    background-color: #ABABF0;
-    position: relative;
-    top: 0;
-    padding: 20px;
-    text-align: center;
-    line-height: 24px;
-    width: 200px;
-    border-radius: 3px;
-    cursor: pointer;
-    margin: auto;
-  }
   
 #texto{
     text-align: center;
 }
 .buttonTwo:hover{
     background-color: rgb(211, 66, 66);
+}
+
+#boton{
+    font-size: 20px;
+    margin: 5% 3% 2% 3%;          
+    padding: 2%;
+    background-color: rgb(230, 106, 69);
+    border-radius: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+
+#boton:hover{
+    background-color: firebrick;
 }
 
 .buttonTwo {

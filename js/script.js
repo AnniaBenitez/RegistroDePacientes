@@ -54,23 +54,53 @@ function procesarDatos(data) {
       }
     }
     buttonAsistencia.addEventListener('click',() => {
+      pos = 2
       console.log(poscPaciente)
       console.log(datt[poscPaciente][6])
       console.log(`ahora es ${datt[poscPaciente][6]}`)
       datt[poscPaciente][6] = true
       console.log(`se cambio a ${datt[poscPaciente][6]}`)
       // Agregar código para actualizar el valor en la hoja de cálculo aquí
+
+      let data = {};
+      let values = [];
+      let fila = ['TRUE'];
+      
+      values.push(fila);
+      data.range = "consultas";
+      data.majorDimension = "ROWS";
+      data.values = values;
+
+      fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/consultas!G${pos}:append?valueInputOption=USER_ENTERED`,
+        {
+        method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+        body: JSON.stringify(data)
+        }
+    ).then(function (response) {
+        response.json().then(function (data) {
+        });
+    });
+
+
+
+
+
     }) 
   }
 
   for(let i=1; i< data.length; i++){
-
-    const consulta = document.createElement('div');
-    consulta.className = "buttonTwo";
-    consulta.onclick = showData
-    fatForm.appendChild(consulta);
-    consulta.innerHTML = `<p id='texto'><b>Paciente:</b> ${data[i][0]} - ${data[i][1]} ${data[i][2]} | <b>Fecha:</b> ${data[i][3]} </p>`
-
+    if(data[i][6] == 'FALSE'){
+      const consulta = document.createElement('div');
+      consulta.className = "buttonTwo";
+      consulta.onclick = showData
+      fatForm.appendChild(consulta);
+      consulta.innerHTML = `<p id='texto'><b>Paciente:</b> ${data[i][0]} - ${data[i][1]} ${data[i][2]} | <b>Fecha:</b> ${data[i][3]} </p>`
+    }
   }
 
 }
